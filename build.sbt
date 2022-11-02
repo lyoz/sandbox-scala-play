@@ -17,6 +17,9 @@ scalacOptions ++= Seq(
 
 libraryDependencies += guice
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "5.0.0" % Test
+libraryDependencies += "com.typesafe.play" %% "play-slick" % "5.1.0"
+libraryDependencies += "com.typesafe.play" %% "play-slick-evolutions" % "5.1.0"
+libraryDependencies += "mysql" % "mysql-connector-java" % "8.0.31"
 
 // Adds additional packages into Twirl
 //TwirlKeys.templateImports += "com.example.controllers._"
