@@ -17,8 +17,8 @@ class UsersDAO @Inject() (
   def all(): Future[Seq[User]] = db.run(Users.result)
 
   private class UsersTable(tag: Tag) extends Table[User](tag, "users") {
-    def userId = column[Int]("user_id", O.PrimaryKey)
+    def userId = column[Int]("user_id", O.PrimaryKey, O.AutoInc)
     def name = column[String]("name")
-    def * : ProvenShape[User] = (userId, name).<>(User.tupled, User.unapply)
+    def * : ProvenShape[User] = (userId.?, name).<>(User.tupled, User.unapply)
   }
 }
