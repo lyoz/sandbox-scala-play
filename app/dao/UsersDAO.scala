@@ -3,18 +3,25 @@ package dao
 import javax.inject.Inject
 import models.User
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
-import scala.concurrent.Future
+import scala.concurrent.{ExecutionContext, Future}
 import slick.jdbc.JdbcProfile
 import slick.lifted.ProvenShape
 
 class UsersDAO @Inject() (
     protected val dbConfigProvider: DatabaseConfigProvider
-) extends HasDatabaseConfigProvider[JdbcProfile] {
+)(implicit executionContext: ExecutionContext)
+    extends HasDatabaseConfigProvider[JdbcProfile] {
   import profile.api._
 
   private val Users = TableQuery[UsersTable]
 
   def all(): Future[Seq[User]] = db.run(Users.result)
+
+  def insert(user: User): Future[User] = {
+    db.run(
+      Users returning Users.map(_.userId) += user
+    ).map(userId => user.copy(Some(userId)))
+  }
 
   private class UsersTable(tag: Tag) extends Table[User](tag, "users") {
     def userId = column[Int]("user_id", O.PrimaryKey, O.AutoInc)
