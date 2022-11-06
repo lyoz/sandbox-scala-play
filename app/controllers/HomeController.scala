@@ -42,4 +42,17 @@ class HomeController @Inject() (
           .map(user => Ok(Json.obj("message" -> s"${user} added")))
     }
   }
+
+  def updateUser(userId: Int) = Action(parse.json).async { implicit request =>
+    request.body.validate[User] match {
+      case JsError(errors) =>
+        Future.successful(
+          BadRequest(Json.obj("message" -> JsError.toJson(errors)))
+        )
+      case JsSuccess(user, path) =>
+        usersDao
+          .update(userId, user)
+          .map(user => Ok(Json.obj("message" -> s"${user} updated")))
+    }
+  }
 }
