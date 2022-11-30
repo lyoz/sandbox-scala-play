@@ -6,7 +6,7 @@ services:
       MYSQL_DATABASE: lyoz
       MYSQL_ROOT_PASSWORD: pw
     ports:
-      - 13306:3306
+      - 53306:3306
     volumes:
       - mysql:/var/lib/mysql
 
