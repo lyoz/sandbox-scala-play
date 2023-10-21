@@ -1,0 +1,14 @@
+services:
+  mysql:
+    image: mysql:8.1.0
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin
+    environment:
+      MYSQL_DATABASE: play
+      MYSQL_ROOT_PASSWORD: pw
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql:/var/lib/mysql
+
+volumes:
+  mysql:
