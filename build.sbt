@@ -15,6 +15,9 @@ scalacOptions ++= Seq(
   "-Wconf:src=target/.*:silent"
 )
 
+semanticdbEnabled := true
+semanticdbVersion := scalafixSemanticdb.revision
+
 libraryDependencies += guice
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "5.1.0" % Test
 
