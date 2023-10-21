@@ -1,8 +1,8 @@
 package controllers
 
-import play.api.mvc._
+import play.api.mvc.{BaseController, ControllerComponents}
 
-import javax.inject._
+import javax.inject.{Inject, Singleton}
 
 /** This controller creates an `Action` to handle HTTP requests to the
   * application's home page.
