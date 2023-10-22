@@ -1,9 +1,13 @@
 package controllers
 
+import dao.UsersDAO
+import org.mockito.Mockito.mock
 import org.scalatestplus.play.PlaySpec
 import org.scalatestplus.play.guice.GuiceOneAppPerTest
 import play.api.test.Helpers._
 import play.api.test.{FakeRequest, Injecting}
+
+import scala.concurrent.ExecutionContext
 
 /** Add your spec here. You can mock out a whole application including requests,
   * plugins etc.
@@ -19,7 +23,11 @@ class HomeControllerSpec
   "HomeController GET" should {
 
     "render the index page from a new instance of controller" in {
-      val controller = new HomeController(stubControllerComponents())
+      implicit val executionContext = inject[ExecutionContext]
+      val controller = new HomeController(
+        mock(classOf[UsersDAO]),
+        stubControllerComponents()
+      )
       val home = controller.index().apply(FakeRequest(GET, "/"))
 
       status(home) mustBe OK
