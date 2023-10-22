@@ -6,7 +6,7 @@ services:
       MYSQL_DATABASE: play
       MYSQL_ROOT_PASSWORD: pw
     ports:
-      - 3306:3306
+      - 53306:3306
     volumes:
       - mysql:/var/lib/mysql
 
