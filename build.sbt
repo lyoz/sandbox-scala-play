@@ -18,8 +18,13 @@ scalacOptions ++= Seq(
 semanticdbEnabled := true
 semanticdbVersion := scalafixSemanticdb.revision
 
-libraryDependencies += guice
-libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "5.1.0" % Test
+libraryDependencies ++= Seq(
+  guice,
+  "com.typesafe.play" %% "play-slick" % "5.1.0",
+  "com.typesafe.play" %% "play-slick-evolutions" % "5.1.0",
+  "com.mysql" % "mysql-connector-j" % "8.1.0",
+  "org.scalatestplus.play" %% "scalatestplus-play" % "5.1.0" % Test
+)
 
 // Adds additional packages into Twirl
 //TwirlKeys.templateImports += "com.example.controllers._"
