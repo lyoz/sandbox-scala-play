@@ -39,4 +39,13 @@ class HomeController @Inject() (
         usersDao.insert(user).map(user => Ok(Json.toJson(user)))
     }
   }
+
+  def updateUser(userId: Int) = Action(parse.json).async { implicit request =>
+    request.body.validate[User] match {
+      case JsError(errors) =>
+        Future.successful(BadRequest(JsError.toJson(errors)))
+      case JsSuccess(user, _) =>
+        usersDao.update(userId, user).map(user => Ok(Json.toJson(user)))
+    }
+  }
 }

@@ -22,6 +22,12 @@ class UsersDAO @Inject() (
     db.run(action).map(userId => user.copy(Some(userId)))
   }
 
+  def update(userId: Int, user: User): Future[User] = {
+    val updatedUser = user.copy(Some(userId))
+    val action = Users.filter(_.userId === userId).update(updatedUser)
+    db.run(action).map(_ => updatedUser)
+  }
+
   private class UsersTable(tag: Tag) extends Table[User](tag, "users") {
     def userId = column[Int]("user_id", O.PrimaryKey, O.AutoInc)
     def name = column[String]("name")
