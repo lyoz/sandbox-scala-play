@@ -1,11 +1,12 @@
 package controllers
 
 import dao.UsersDAO
-import play.api.libs.json.Json
+import models.User
+import play.api.libs.json.{JsError, JsSuccess, Json}
 import play.api.mvc.{BaseController, ControllerComponents}
 
 import javax.inject.{Inject, Singleton}
-import scala.concurrent.ExecutionContext
+import scala.concurrent.{ExecutionContext, Future}
 
 /** This controller creates an `Action` to handle HTTP requests to the
   * application's home page.
@@ -28,5 +29,14 @@ class HomeController @Inject() (
 
   def getUsers() = Action.async {
     usersDao.all().map(users => Ok(Json.toJson(users)))
+  }
+
+  def insertUser() = Action(parse.json).async { implicit request =>
+    request.body.validate[User] match {
+      case JsError(errors) =>
+        Future.successful(BadRequest(JsError.toJson(errors)))
+      case JsSuccess(user, _) =>
+        usersDao.insert(user).map(user => Ok(Json.toJson(user)))
+    }
   }
 }
