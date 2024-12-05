@@ -5,7 +5,7 @@ version := "1.0-SNAPSHOT"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
-scalaVersion := "2.13.12"
+scalaVersion := "2.13.15"
 
 scalacOptions ++= Seq(
   "-deprecation",
@@ -18,8 +18,10 @@ scalacOptions ++= Seq(
 semanticdbEnabled := true
 semanticdbVersion := scalafixSemanticdb.revision
 
-libraryDependencies += guice
-libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "5.1.0" % Test
+libraryDependencies ++= Seq(
+  guice,
+  "org.scalatestplus.play" %% "scalatestplus-play" % "6.0.1" % Test
+)
 
 // Adds additional packages into Twirl
 //TwirlKeys.templateImports += "com.example.controllers._"
