@@ -20,11 +20,11 @@ semanticdbVersion := scalafixSemanticdb.revision
 
 libraryDependencies ++= Seq(
   guice,
-  "com.typesafe.play" %% "play-slick" % "5.1.0",
-  "com.typesafe.play" %% "play-slick-evolutions" % "5.1.0",
-  "com.mysql" % "mysql-connector-j" % "8.1.0",
+  "com.typesafe.play" %% "play-slick" % "5.3.1",
+  "com.typesafe.play" %% "play-slick-evolutions" % "5.3.1",
+  "com.mysql" % "mysql-connector-j" % "9.1.0",
   "org.scalatestplus.play" %% "scalatestplus-play" % "6.0.1" % Test,
-  "org.mockito" % "mockito-core" % "5.6.0" % Test
+  "org.mockito" % "mockito-core" % "5.14.2" % Test
 )
 
 // Adds additional packages into Twirl
