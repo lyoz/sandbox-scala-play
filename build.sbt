@@ -5,7 +5,7 @@ version := "1.0-SNAPSHOT"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
-scalaVersion := "2.13.12"
+scalaVersion := "2.13.15"
 
 scalacOptions ++= Seq(
   "-deprecation",
@@ -23,7 +23,7 @@ libraryDependencies ++= Seq(
   "com.typesafe.play" %% "play-slick" % "5.1.0",
   "com.typesafe.play" %% "play-slick-evolutions" % "5.1.0",
   "com.mysql" % "mysql-connector-j" % "8.1.0",
-  "org.scalatestplus.play" %% "scalatestplus-play" % "5.1.0" % Test,
+  "org.scalatestplus.play" %% "scalatestplus-play" % "6.0.1" % Test,
   "org.mockito" % "mockito-core" % "5.6.0" % Test
 )
 
